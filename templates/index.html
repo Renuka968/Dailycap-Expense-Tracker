@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Home — DailyCap{% endblock %}
+{% block content %}
+  <section class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h1 class="text-4xl font-bold mb-3">Track. Save. Grow.</h1>
+      <p class="text-slate-300 mb-6">A professional, daily expense tracker with smart daily budget alerts.</p>
+      <div class="flex gap-3">
+        <a href="{{ url_for('signup') }}" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700">Get Started</a>
+        <a href="{{ url_for('login') }}" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700">I have an account</a>
+      </div>
+    </div>
+    <div class="rounded-2xl border border-slate-800 p-6 bg-slate-900/60">
+      <div class="text-sm text-slate-400 mb-2">Preview</div>
+      <div class="h-64 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl grid place-items-center"><div class='w-full space-y-4 px-4 py-3'>
+                <div class="grid grid-cols-3 gap-3 text-xs md:text-sm">
+                  <div class="bg-slate-800/60 rounded-xl p-3 text-center">
+                    <div class="text-slate-400">Today</div>
+                    <div class="text-base md:text-lg font-semibold">₹350</div>
+                  </div>
+                  <div class="bg-slate-800/60 rounded-xl p-3 text-center">
+                    <div class="text-slate-400">Remaining</div>
+                    <div class="text-base md:text-lg font-semibold text-green-400">₹150</div>
+                  </div>
+                  <div class="bg-slate-800/60 rounded-xl p-3 text-center">
+                    <div class="text-slate-400">Alert</div>
+                    <div class="text-base md:text-lg font-semibold text-yellow-400">⚠️</div>
+                  </div>
+                </div>
+                <canvas id="previewChart" height="90"></canvas>
+              </div></div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+  (function (){
+    try {
+      var el = document.getElementById('previewChart');
+      if(!el || typeof Chart === 'undefined') return;
+      var ctx = el.getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          datasets: [{
+            label: 'Daily Expenses',
+            data: [300, 450, 380, 520, 470, 500, 340],
+            fill: false,
+            tension: 0.35
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: '#94a3b8' }, grid: { color: '#0f172a' } },
+            y: { ticks: { color: '#94a3b8' }, grid: { color: '#0f172a' } }
+          }
+        }
+      });
+    } catch(e) {}
+  })();
+  </script>
+{% endblock %}

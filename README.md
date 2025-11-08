@@ -40,13 +40,6 @@ It combines simplicity, analytics, and intelligent design to make personal finan
 
 ---
 
-## 🖼️ Dashboard Preview
-
-*(Example visualization of the dark dashboard)*  
-![DailyCap Dashboard](https://via.placeholder.com/1000x500.png?text=DailyCap+Dark+Dashboard)
-
----
-
 ## ⚡ Run Locally
 
 ```bash
